@@ -102,25 +102,3 @@ resource "aws_security_group" "allow_all" {
     Name = "allow_all"
   }
 }
-
-resource "aws_instance" "pub" {
-  ami           = "ami-0bcf5425cdc1d8a85"
-  instance_type = "t2.micro"
-  subnet_id   = aws_subnet.pubsub.id
-  key_name = "windowskey"
-  vpc_security_group_ids  = ["${aws_security_group.allow_all.id}"]
-  associate_public_ip_address = true
-  tags = {
-    Name = "pub"
-  }
-}
-resource "aws_instance" "pri" {
-  ami           = "ami-0bcf5425cdc1d8a85"
-  instance_type = "t2.micro"
-  subnet_id   = aws_subnet.prisub.id
-  key_name = "windowskey"
-  vpc_security_group_ids  = ["${aws_security_group.allow_all.id}"]
- tags = {
-    Name = "pri"
-  }
-}
